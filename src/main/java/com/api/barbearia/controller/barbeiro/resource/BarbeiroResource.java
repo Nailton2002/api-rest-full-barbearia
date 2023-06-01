@@ -24,9 +24,6 @@ public class BarbeiroResource {
     @Autowired
     private BarbeiroService service;
 
-    @Autowired
-    private BarbeiroRepository repository;
-
     @Transactional
     @PostMapping
     public ResponseEntity salvar(@RequestBody @Valid BarbeiroDadosCadastrais dados, UriComponentsBuilder uriComponentsBuilder){
@@ -61,6 +58,12 @@ public class BarbeiroResource {
         return ResponseEntity.ok().body(dados);
     }
 
+    @Transactional
+    @DeleteMapping("/{id}")
+    public ResponseEntity deletar(@PathVariable Long id){
+        service.deletar(id);
+        return ResponseEntity.noContent().build();
+    }
 
 
 
