@@ -51,6 +51,19 @@ public class BarbeiroService {
         return dados;
     }
 
+    public void deletar(Long id){
+        if (repository.existsById(id)) {
+            repository.deleteById(id);
+        } else {
+            throw new ObjectNotFoundException(id);
+        }
+    }
+
+    //METODO DE REFERENCIA PARA ATUALIZAR E DELETAR
+    public Barbeiro getReferenceById(Long id) {
+        Optional<Barbeiro> obj = Optional.of(repository.getReferenceById(id));
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado" + Barbeiro.class));
+    }
 
 
 
