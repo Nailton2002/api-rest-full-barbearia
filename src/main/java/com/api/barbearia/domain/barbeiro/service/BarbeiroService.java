@@ -7,6 +7,8 @@ import com.api.barbearia.domain.barbeiro.entity.Barbeiro;
 import com.api.barbearia.domain.barbeiro.repository.BarbeiroRepository;
 import com.api.barbearia.domain.barbeiro.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -57,6 +59,10 @@ public class BarbeiroService {
         } else {
             throw new ObjectNotFoundException(id);
         }
+    }
+
+    public Page<Barbeiro> buscarPorAtivoPaginada(Pageable paginacao){
+        return repository.findAllByAtivoTrue(paginacao);
     }
 
     //METODO DE REFERENCIA PARA ATUALIZAR E DELETAR

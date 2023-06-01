@@ -9,6 +9,9 @@ import com.api.barbearia.domain.barbeiro.repository.BarbeiroRepository;
 import com.api.barbearia.domain.barbeiro.service.BarbeiroService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,10 +55,16 @@ public class BarbeiroResource {
         return ResponseEntity.ok().body(dadosListagems);
     }
 
-    @GetMapping("/porNome")
+    @GetMapping("/porNomes")
     public ResponseEntity<List<BarbeiroDadosDetalhado>> buscarPorNome(@RequestParam(name = "nome") String nome){
         List<BarbeiroDadosDetalhado> dados = service.findByNome(nome);
         return ResponseEntity.ok().body(dados);
+    }
+
+    @GetMapping(value = "/paginados")
+    public ResponseEntity<Page<BarbeiroDadosListagem>> buscarPorAtivoPaginada(@PageableDefault(size = 5, sort = {"nome"})Pageable paginacao){
+        var page = service.buscarPorAtivoPaginada(paginacao).map(BarbeiroDadosListagem::new);
+        return ResponseEntity.ok(page);
     }
 
     @Transactional
@@ -64,6 +73,7 @@ public class BarbeiroResource {
         service.deletar(id);
         return ResponseEntity.noContent().build();
     }
+
 
 
 
