@@ -4,7 +4,7 @@ import com.api.barbearia.domain.barbeiro.entity.Barbeiro;
 import com.api.barbearia.domain.barbeiro.enums.Especialidade;
 import com.api.barbearia.endereco.model.Endereco;
 
-public record BarbeiroDadosPorId(
+public record BarbeiroDadosDetalhado(
         Long id,
         String nome,
         String email,
@@ -12,7 +12,7 @@ public record BarbeiroDadosPorId(
         Especialidade especialidade,
         Endereco endereco
 ) {
-    public BarbeiroDadosPorId(Barbeiro obj){
+    public BarbeiroDadosDetalhado(Barbeiro obj){
         this(obj.getId(), obj.getNome(), obj.getEmail(), obj.getTelefone(), obj.getEspecialidade(),
              obj.getEndereco());
     }
