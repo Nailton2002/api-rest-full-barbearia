@@ -1,5 +1,6 @@
 package com.api.barbearia.controller.barbeiro.resource;
 
+import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosAtualizacao;
 import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosCadastrais;
 import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosPorId;
 import com.api.barbearia.domain.barbeiro.service.BarbeiroService;
@@ -26,9 +27,22 @@ public class BarbeiroResource {
         return ResponseEntity.created(uri).body(new BarbeiroDadosPorId(obj));
     }
 
+    @Transactional
+    @PutMapping("/{id}")
+    public ResponseEntity atulizar(@RequestBody @Valid BarbeiroDadosAtualizacao dados){
+        var obj = service.atualizar(dados.id());
+        obj.atualizarInformacoes(dados);
+        return ResponseEntity.ok(new BarbeiroDadosPorId(obj));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<BarbeiroDadosPorId> buscarPorId(@PathVariable Long id){
         BarbeiroDadosPorId dados = service.buscarPorId(id);
         return ResponseEntity.ok().body(dados);
     }
+
+
+
+
+
 }

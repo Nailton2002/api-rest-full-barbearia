@@ -8,6 +8,8 @@ import com.api.barbearia.domain.barbeiro.service.exception.ObjectNotFoundExcepti
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class BarbeiroService {
 
@@ -24,4 +26,15 @@ public class BarbeiroService {
         var obj = repository.findById(id).orElseThrow(()-> new ObjectNotFoundException(id));
         return new BarbeiroDadosPorId(obj);
     }
+
+    public Barbeiro atualizar(Long id) {
+        if (repository.existsById(id)) {
+            Optional<Barbeiro> obj = Optional.of(repository.getReferenceById(id));
+            return obj.orElseThrow(()-> new ObjectNotFoundException(id));
+        } else {
+            throw new ObjectNotFoundException(id);
+        }
+
+    }
+
 }
