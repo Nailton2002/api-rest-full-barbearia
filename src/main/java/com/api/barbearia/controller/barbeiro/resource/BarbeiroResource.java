@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
@@ -25,7 +22,13 @@ public class BarbeiroResource {
     @PostMapping
     public ResponseEntity salvar(@RequestBody @Valid BarbeiroDadosCadastrais dados, UriComponentsBuilder uriComponentsBuilder){
         var obj = service.salvar(dados);
-        var uri = uriComponentsBuilder.path("/barbeiro/{id}").buildAndExpand(obj.getId()).toUri();
+        var uri = uriComponentsBuilder.path("/barbeiros/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).body(new BarbeiroDadosPorId(obj));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<BarbeiroDadosPorId> buscarPorId(@PathVariable Long id){
+        BarbeiroDadosPorId dados = service.buscarPorId(id);
+        return ResponseEntity.ok().body(dados);
     }
 }
