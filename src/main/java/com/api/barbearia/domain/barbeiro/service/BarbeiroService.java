@@ -64,7 +64,7 @@ public class BarbeiroService {
 
     public void barbeiroDesativo(Long id){
         var obj = repository.getReferenceById(id);
-        if (atualizar(id).getAtivo() == true){
+        if (referencia(id).getAtivo() == true){
             obj.barbeiroDesativo();
         } else {
             throw new ResourceNotFoundException(id);
@@ -76,7 +76,7 @@ public class BarbeiroService {
     }
 
     //METODO DE REFERENCIA PARA ATUALIZAR E DELETAR
-    public Barbeiro getReferenceById(Long id) {
+    public Barbeiro referencia(Long id) {
         Optional<Barbeiro> obj = Optional.of(repository.getReferenceById(id));
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado" + Barbeiro.class));
     }

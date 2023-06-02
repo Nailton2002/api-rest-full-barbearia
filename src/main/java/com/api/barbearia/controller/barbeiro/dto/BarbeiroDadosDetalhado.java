@@ -2,7 +2,7 @@ package com.api.barbearia.controller.barbeiro.dto;
 
 import com.api.barbearia.domain.barbeiro.entity.Barbeiro;
 import com.api.barbearia.domain.barbeiro.enums.Especialidade;
-import com.api.barbearia.endereco.model.Endereco;
+import com.api.barbearia.domain.endereco.model.Endereco;
 
 public record BarbeiroDadosDetalhado(
         Long id,
