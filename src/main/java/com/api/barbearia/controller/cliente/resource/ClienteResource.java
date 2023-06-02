@@ -35,4 +35,10 @@ public class ClienteResource {
         obj.atualizarInformacoes(dados);
         return ResponseEntity.ok(new ClienteDadosDetalhado(obj));
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ClienteDadosDetalhado> buscarPorId(@PathVariable Long id){
+        ClienteDadosDetalhado dados = service.buscarPorId(id);
+        return ResponseEntity.ok().body(dados);
+    }
 }
