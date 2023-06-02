@@ -6,7 +6,8 @@ import com.api.barbearia.controller.cliente.dto.ClienteDadosDetalhado;
 import com.api.barbearia.controller.cliente.dto.ClienteDadosListagem;
 import com.api.barbearia.domain.cliente.entity.Cliente;
 import com.api.barbearia.domain.cliente.repository.ClienteRepository;
-import com.api.barbearia.domain.cliente.service.exception.ObjectNotFoundException;
+import com.api.barbearia.infra.exception.ObjectNotFoundException;
+import com.api.barbearia.infra.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -34,7 +35,7 @@ public class ClienteService {
     }
 
     public Cliente atualizar(Long id) {
-        if (repository.getReferenceById(id).getAtivo()==true) {
+        if (repository.getReferenceById(id).getAtivo() == true) {
             Optional<Cliente> obj = Optional.of(repository.getReferenceById(id));
             return obj.orElseThrow(()-> new ObjectNotFoundException(id));
         } else {
@@ -62,7 +63,22 @@ public class ClienteService {
         return repository.findAllByAtivoTrue(paginacao);
     }
 
+    public void clienteDesativo(Long id){
+        var obj = repository.getReferenceById(id);
+        if (atualizar(id).getAtivo() == true){
+            obj.clienteDesativo();
+        } else {
+            throw new ResourceNotFoundException(id);
+        }
+    }
 
+    public void deletar(Long id){
+        if (repository.existsById(id) == true) {
+            repository.deleteById(id);
+        } else {
+            throw new ObjectNotFoundException(id);
+        }
+    }
 
 
 

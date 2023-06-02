@@ -1,4 +1,4 @@
-package com.api.barbearia.controller.cliente.resource.exception;
+package com.api.barbearia.infra.exception;
 
 public class ResourceNotFoundException extends RuntimeException{
 	private static final long serialVersionUID = 1L;

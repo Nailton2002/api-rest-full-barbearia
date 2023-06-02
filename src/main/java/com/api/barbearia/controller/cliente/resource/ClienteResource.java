@@ -5,7 +5,9 @@ import com.api.barbearia.controller.cliente.dto.ClienteDadosCadastrais;
 import com.api.barbearia.controller.cliente.dto.ClienteDadosDetalhado;
 import com.api.barbearia.controller.cliente.dto.ClienteDadosListagem;
 import com.api.barbearia.domain.cliente.service.ClienteService;
+
 import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -64,10 +66,19 @@ public class ClienteResource {
         return ResponseEntity.ok(page);
     }
 
+    @Transactional
+    @DeleteMapping("/desativos/{id}")
+    public ResponseEntity clienteDesativo(@PathVariable Long id){
+        service.clienteDesativo(id);
+        return ResponseEntity.noContent().build();
+    }
 
-
-
-
+    @Transactional
+    @DeleteMapping("/{id}")
+    public ResponseEntity deletar(@PathVariable Long id){
+        service.deletar(id);
+        return ResponseEntity.noContent().build();
+    }
 
 
 

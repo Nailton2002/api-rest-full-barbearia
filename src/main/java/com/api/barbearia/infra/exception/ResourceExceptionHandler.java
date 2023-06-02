@@ -1,7 +1,5 @@
 package com.api.barbearia.infra.exception;
 
-import com.api.barbearia.controller.barbeiro.resource.exception.ResourceNotFoundException;
-import com.api.barbearia.domain.barbeiro.service.exception.ObjectNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
