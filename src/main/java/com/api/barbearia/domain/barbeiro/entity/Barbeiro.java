@@ -47,7 +47,7 @@ public class Barbeiro {
         }
     }
 
-    public void exclusaoLogica() {
+    public void barbeiroDesativo() {
         this.ativo = false;
     }
 }

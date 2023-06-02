@@ -6,6 +6,7 @@ import com.api.barbearia.endereco.model.Endereco;
 
 public record BarbeiroDadosDetalhado(
         Long id,
+        Boolean ativo,
         String nome,
         String email,
         String telefone,
@@ -13,7 +14,7 @@ public record BarbeiroDadosDetalhado(
         Endereco endereco
 ) {
     public BarbeiroDadosDetalhado(Barbeiro obj){
-        this(obj.getId(), obj.getNome(), obj.getEmail(), obj.getTelefone(), obj.getEspecialidade(),
+        this(obj.getId(), obj.getAtivo(), obj.getNome(), obj.getEmail(), obj.getTelefone(), obj.getEspecialidade(),
              obj.getEndereco());
     }
 
