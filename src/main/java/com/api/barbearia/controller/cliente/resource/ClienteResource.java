@@ -1,10 +1,10 @@
 package com.api.barbearia.controller.cliente.resource;
 
-import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosAtualizacao;
 import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosDetalhado;
 import com.api.barbearia.controller.cliente.dto.ClienteDadosAtualizacao;
 import com.api.barbearia.controller.cliente.dto.ClienteDadosCadastrais;
 import com.api.barbearia.controller.cliente.dto.ClienteDadosDetalhado;
+import com.api.barbearia.controller.cliente.dto.ClienteDadosListagem;
 import com.api.barbearia.domain.cliente.service.ClienteService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/clientes")
@@ -41,4 +43,44 @@ public class ClienteResource {
         ClienteDadosDetalhado dados = service.buscarPorId(id);
         return ResponseEntity.ok().body(dados);
     }
+
+    @GetMapping("/porNomes")
+    public ResponseEntity<List<ClienteDadosDetalhado>> buscarPorNome(@RequestParam(name = "nome") String nome){
+        List<ClienteDadosDetalhado> dados = service.buscarPorNome(nome);
+        return ResponseEntity.ok().body(dados);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ClienteDadosListagem>> listar(){
+        List<ClienteDadosListagem> dadosList = service.buscarTodos();
+        return ResponseEntity.ok().body(dadosList);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

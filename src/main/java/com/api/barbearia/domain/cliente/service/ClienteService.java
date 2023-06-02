@@ -4,13 +4,16 @@ import com.api.barbearia.controller.cliente.dto.ClienteDadosAtualizacao;
 import com.api.barbearia.controller.cliente.dto.ClienteDadosCadastrais;
 
 import com.api.barbearia.controller.cliente.dto.ClienteDadosDetalhado;
+import com.api.barbearia.controller.cliente.dto.ClienteDadosListagem;
 import com.api.barbearia.domain.cliente.entity.Cliente;
 import com.api.barbearia.domain.cliente.repository.ClienteRepository;
 import com.api.barbearia.domain.cliente.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ClienteService {
@@ -19,7 +22,7 @@ public class ClienteService {
     private ClienteRepository repository;
 
     //METODO DE REFERENCIA PARA ATUALIZAR E DELETAR
-    public Cliente atualizar(Long id) {
+    public Cliente referencia(Long id) {
         Optional<Cliente> obj = Optional.of(repository.getReferenceById(id));
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado" + Cliente.class));
     }
@@ -29,9 +32,52 @@ public class ClienteService {
         return obj;
     }
 
+    public Cliente atualizar(Long id) {
+        if (repository.getReferenceById(id).getAtivo()==true) {
+            Optional<Cliente> obj = Optional.of(repository.getReferenceById(id));
+            return obj.orElseThrow(()-> new ObjectNotFoundException(id));
+        } else {
+            throw new ObjectNotFoundException(id);
+        }
+    }
+
     public ClienteDadosDetalhado buscarPorId(Long id){
         var obj = repository.findById(id).orElseThrow(()-> new ObjectNotFoundException(id));
         return new ClienteDadosDetalhado(obj);
     }
+
+    public List<ClienteDadosDetalhado> buscarPorNome(String nome){
+        List<Cliente> objList = repository.findByNome(nome);
+        List<ClienteDadosDetalhado> dadosList = objList.stream().map(c -> new ClienteDadosDetalhado(c)).collect(Collectors.toList());
+        return dadosList;
+    }
+    public List<ClienteDadosListagem> buscarTodos(){
+        List<Cliente> objList = repository.findAll();
+        List<ClienteDadosListagem> dadosList = objList.stream().map(c -> new ClienteDadosListagem(c)).collect(Collectors.toList());
+        return dadosList;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
