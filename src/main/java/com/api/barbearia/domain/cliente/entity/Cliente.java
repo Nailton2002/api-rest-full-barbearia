@@ -2,6 +2,8 @@ package com.api.barbearia.domain.cliente.entity;
 
 import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosAtualizacao;
 import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosCadastrais;
+import com.api.barbearia.controller.cliente.dto.ClienteDadosAtualizacao;
+import com.api.barbearia.controller.cliente.dto.ClienteDadosCadastrais;
 import com.api.barbearia.domain.barbeiro.enums.Especialidade;
 import com.api.barbearia.endereco.model.Endereco;
 import jakarta.persistence.*;
@@ -10,8 +12,8 @@ import lombok.*;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "Barbeiro")
-@Table(name = "tb_barbeiros")
+@Entity(name = "Cliente")
+@Table(name = "tb_clientes")
 @EqualsAndHashCode(of = "id")
 public class Cliente {
     @Id
@@ -24,7 +26,7 @@ public class Cliente {
     private Endereco endereco;
     private Boolean ativo;
 
-    public Cliente(BarbeiroDadosCadastrais dados) {
+    public Cliente(ClienteDadosCadastrais dados) {
         this.ativo = true;
         this.nome = dados.nome();
         this.email = dados.email();
@@ -32,7 +34,7 @@ public class Cliente {
         this.endereco = new Endereco(dados.endereco());
     }
 
-    public void atualizarInformacoes(BarbeiroDadosAtualizacao dados) {
+    public void atualizarInformacoes(ClienteDadosAtualizacao dados) {
         if (dados.nome() != null) {
             this.nome = dados.nome();
         }
@@ -44,7 +46,7 @@ public class Cliente {
         }
     }
 
-    public void barbeiroDesativo() {
+    public void clienteDesativo() {
         this.ativo = false;
     }
 }

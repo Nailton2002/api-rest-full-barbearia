@@ -2,6 +2,7 @@ package com.api.barbearia.controller.cliente.dto;
 
 import com.api.barbearia.domain.barbeiro.entity.Barbeiro;
 import com.api.barbearia.domain.barbeiro.enums.Especialidade;
+import com.api.barbearia.domain.cliente.entity.Cliente;
 import com.api.barbearia.endereco.model.Endereco;
 
 public record ClienteDadosDetalhado(
@@ -12,7 +13,7 @@ public record ClienteDadosDetalhado(
         String telefone,
         Endereco endereco
 ) {
-    public ClienteDadosDetalhado(Barbeiro obj){
+    public ClienteDadosDetalhado(Cliente obj){
         this(obj.getId(), obj.getAtivo(), obj.getNome(), obj.getEmail(), obj.getTelefone(), obj.getEndereco());
     }
 
