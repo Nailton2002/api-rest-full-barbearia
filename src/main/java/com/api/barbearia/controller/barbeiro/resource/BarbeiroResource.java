@@ -77,8 +77,7 @@ public class BarbeiroResource {
     @Transactional
     @DeleteMapping("/desativos/{id}")
     public ResponseEntity barbeiroDesativo(@PathVariable Long id){
-        var obj = service.getReferenceById(id);
-        obj.barbeiroDesativo();
+         service.barbeiroDesativo(id);
         return ResponseEntity.noContent().build();
     }
 

@@ -3,6 +3,7 @@ package com.api.barbearia.domain.barbeiro.service;
 import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosCadastrais;
 import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosListagem;
 import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosDetalhado;
+import com.api.barbearia.controller.barbeiro.resource.exception.ResourceNotFoundException;
 import com.api.barbearia.domain.barbeiro.entity.Barbeiro;
 import com.api.barbearia.domain.barbeiro.repository.BarbeiroRepository;
 import com.api.barbearia.domain.barbeiro.service.exception.ObjectNotFoundException;
@@ -27,15 +28,6 @@ public class BarbeiroService {
         return obj;
     }
 
-    public Barbeiro atualizar(Long id) {
-        if (repository.existsById(id)) {
-            Optional<Barbeiro> obj = Optional.of(repository.getReferenceById(id));
-            return obj.orElseThrow(()-> new ObjectNotFoundException(id));
-        } else {
-            throw new ObjectNotFoundException(id);
-        }
-    }
-
     public BarbeiroDadosDetalhado buscarPorId(Long id){
         var obj = repository.findById(id).orElseThrow(()-> new ObjectNotFoundException(id));
         return new BarbeiroDadosDetalhado(obj);
@@ -53,11 +45,29 @@ public class BarbeiroService {
         return dados;
     }
 
+    public Barbeiro atualizar(Long id) {
+        if (repository.getReferenceById(id).getAtivo()==true) {
+            Optional<Barbeiro> obj = Optional.of(repository.getReferenceById(id));
+            return obj.orElseThrow(()-> new ObjectNotFoundException(id));
+        } else {
+            throw new ObjectNotFoundException(id);
+        }
+    }
+
     public void deletar(Long id){
-        if (repository.existsById(id)) {
+        if (repository.existsById(id) == true) {
             repository.deleteById(id);
         } else {
             throw new ObjectNotFoundException(id);
+        }
+    }
+
+    public void barbeiroDesativo(Long id){
+        var obj = repository.getReferenceById(id);
+        if (atualizar(id).getAtivo() == true){
+            obj.barbeiroDesativo();
+        } else {
+            throw new ResourceNotFoundException(id);
         }
     }
 
