@@ -1,6 +1,5 @@
 package com.api.barbearia.controller.cliente.resource;
 
-import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosDetalhado;
 import com.api.barbearia.controller.cliente.dto.ClienteDadosAtualizacao;
 import com.api.barbearia.controller.cliente.dto.ClienteDadosCadastrais;
 import com.api.barbearia.controller.cliente.dto.ClienteDadosDetalhado;
@@ -8,6 +7,9 @@ import com.api.barbearia.controller.cliente.dto.ClienteDadosListagem;
 import com.api.barbearia.domain.cliente.service.ClienteService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -54,6 +56,12 @@ public class ClienteResource {
     public ResponseEntity<List<ClienteDadosListagem>> listar(){
         List<ClienteDadosListagem> dadosList = service.buscarTodos();
         return ResponseEntity.ok().body(dadosList);
+    }
+
+    @GetMapping(value = "/paginados")
+    public ResponseEntity<Page<ClienteDadosListagem>> buscarPorAtivoPaginada(@PageableDefault(size = 5, sort = {"nome"}) Pageable paginacao){
+        var page = service.buscarPorAtivoPaginada(paginacao).map(ClienteDadosListagem::new);
+        return ResponseEntity.ok(page);
     }
 
 

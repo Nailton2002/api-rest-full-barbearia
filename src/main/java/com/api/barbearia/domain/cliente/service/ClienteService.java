@@ -1,14 +1,15 @@
 package com.api.barbearia.domain.cliente.service;
 
-import com.api.barbearia.controller.cliente.dto.ClienteDadosAtualizacao;
-import com.api.barbearia.controller.cliente.dto.ClienteDadosCadastrais;
 
+import com.api.barbearia.controller.cliente.dto.ClienteDadosCadastrais;
 import com.api.barbearia.controller.cliente.dto.ClienteDadosDetalhado;
 import com.api.barbearia.controller.cliente.dto.ClienteDadosListagem;
 import com.api.barbearia.domain.cliente.entity.Cliente;
 import com.api.barbearia.domain.cliente.repository.ClienteRepository;
 import com.api.barbearia.domain.cliente.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -57,6 +58,9 @@ public class ClienteService {
         return dadosList;
     }
 
+    public Page<Cliente> buscarPorAtivoPaginada(Pageable paginacao){
+        return repository.findAllByAtivoTrue(paginacao);
+    }
 
 
 
