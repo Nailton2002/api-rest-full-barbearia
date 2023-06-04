@@ -1,7 +1,6 @@
 package com.api.barbearia.controller.cliente.dto;
 
-import com.api.barbearia.domain.barbeiro.entity.Barbeiro;
-import com.api.barbearia.domain.barbeiro.enums.Especialidade;
+
 import com.api.barbearia.domain.cliente.entity.Cliente;
 
 public record ClienteDadosListagem(

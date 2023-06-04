@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "Cliente")
-@Table(name = "tb_clientes")
+@Table(name = "clientes")
 @EqualsAndHashCode(of = "id")
 public class Cliente {
     @Id

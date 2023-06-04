@@ -1,13 +1,9 @@
 package com.api.barbearia.controller.barbeiro.resource;
 
-
-
 import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosAtualizacao;
 import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosCadastrais;
 import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosDetalhado;
 import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosListagem;
-import com.api.barbearia.domain.barbeiro.service.BarbeiroService;
-
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +22,7 @@ import java.util.List;
 public class BarbeiroResource {
 
     @Autowired
-    private BarbeiroService service;
+    private com.api.barbearia.domain.barbeiro1.service.BarbeiroService service;
 
     @Transactional
     @PostMapping
@@ -64,7 +60,7 @@ public class BarbeiroResource {
 
     @GetMapping(value = "/paginados")
     public ResponseEntity<Page<BarbeiroDadosListagem>> buscarPorAtivoPaginada(@PageableDefault(size = 5, sort = {"nome"}) Pageable paginacao){
-        var page = service.buscarPorAtivoPaginada(paginacao).map(BarbeiroDadosListagem::new);
+        var page = service.findAllByAtivoTrue(paginacao).map(BarbeiroDadosListagem::new);
         return ResponseEntity.ok(page);
     }
 

@@ -11,7 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "Barbeiro")
-@Table(name = "tb_barbeiros")
+@Table(name = "barbeiros")
 @EqualsAndHashCode(of = "id")
 public class Barbeiro {
     @Id

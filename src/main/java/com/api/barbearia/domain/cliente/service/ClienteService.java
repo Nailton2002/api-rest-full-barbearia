@@ -1,6 +1,5 @@
 package com.api.barbearia.domain.cliente.service;
 
-
 import com.api.barbearia.controller.cliente.dto.ClienteDadosCadastrais;
 import com.api.barbearia.controller.cliente.dto.ClienteDadosDetalhado;
 import com.api.barbearia.controller.cliente.dto.ClienteDadosListagem;

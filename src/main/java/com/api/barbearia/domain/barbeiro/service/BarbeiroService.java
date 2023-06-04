@@ -1,8 +1,8 @@
-package com.api.barbearia.domain.barbeiro.service;
+package com.api.barbearia.domain.barbeiro1.service;
 
 import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosCadastrais;
-import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosListagem;
 import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosDetalhado;
+import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosListagem;
 import com.api.barbearia.domain.barbeiro.entity.Barbeiro;
 import com.api.barbearia.domain.barbeiro.repository.BarbeiroRepository;
 import com.api.barbearia.infra.exception.ObjectNotFoundException;
@@ -22,7 +22,18 @@ public class BarbeiroService {
     @Autowired
     private BarbeiroRepository repository;
 
-    public Barbeiro salvar(BarbeiroDadosCadastrais dados){
+    public Barbeiro salvar(BarbeiroDadosCadastrais dados) {
+
+        boolean emailExiste = repository.existsByEmail(dados.email());
+        if (emailExiste){
+            throw new ObjectNotFoundException("Email existe");
+        }
+
+        boolean foneExiste = repository.existsByTelefone(dados.telefone());
+        if (foneExiste){
+            throw new ObjectNotFoundException("Telefone existe");
+        }
+
         var obj = new Barbeiro(dados);
         obj = repository.save(new Barbeiro(dados));
         return obj;
@@ -71,6 +82,9 @@ public class BarbeiroService {
         }
     }
 
+    public Page<Barbeiro> findAllByAtivoTrue(Pageable paginacao) {
+        return repository.findAllByAtivoTrue(paginacao);
+    }
     public Page<Barbeiro> buscarPorAtivoPaginada(Pageable paginacao){
         return repository.findAllByAtivoTrue(paginacao);
     }

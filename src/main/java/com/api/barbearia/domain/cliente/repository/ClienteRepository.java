@@ -14,4 +14,12 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
     @Query(value = "select c from Cliente c where c.nome like %?1%")
     List<Cliente> findByNome(String nome);
+
+    @Query("""
+            select c.ativo
+            from Cliente c
+            where
+            c.id = :id
+            """)
+    Boolean findAtivoById(Long id);
 }
