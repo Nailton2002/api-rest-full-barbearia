@@ -2,17 +2,14 @@ package com.api.barbearia.controller.barbeiro.resource;
 
 import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosAtualizacao;
 import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosCadastrais;
-import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosListagem;
 import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosDetalhado;
-import com.api.barbearia.domain.barbeiro.entity.Barbeiro;
-import com.api.barbearia.domain.barbeiro.repository.BarbeiroRepository;
-import com.api.barbearia.domain.barbeiro.service.BarbeiroService;
+import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosListagem;
 import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +22,7 @@ import java.util.List;
 public class BarbeiroResource {
 
     @Autowired
-    private BarbeiroService service;
+    private com.api.barbearia.domain.barbeiro1.service.BarbeiroService service;
 
     @Transactional
     @PostMapping
@@ -49,21 +46,21 @@ public class BarbeiroResource {
         return ResponseEntity.ok().body(dados);
     }
 
-    @GetMapping
-    public ResponseEntity<List<BarbeiroDadosListagem>> listar(){
-        List<BarbeiroDadosListagem> dadosListagems = service.buscarTodos();
-        return ResponseEntity.ok().body(dadosListagems);
-    }
-
     @GetMapping("/porNomes")
     public ResponseEntity<List<BarbeiroDadosDetalhado>> buscarPorNome(@RequestParam(name = "nome") String nome){
         List<BarbeiroDadosDetalhado> dados = service.findByNome(nome);
         return ResponseEntity.ok().body(dados);
     }
 
+    @GetMapping
+    public ResponseEntity<List<BarbeiroDadosListagem>> listar(){
+        List<BarbeiroDadosListagem> dadosListagems = service.buscarTodos();
+        return ResponseEntity.ok().body(dadosListagems);
+    }
+
     @GetMapping(value = "/paginados")
-    public ResponseEntity<Page<BarbeiroDadosListagem>> buscarPorAtivoPaginada(@PageableDefault(size = 5, sort = {"nome"})Pageable paginacao){
-        var page = service.buscarPorAtivoPaginada(paginacao).map(BarbeiroDadosListagem::new);
+    public ResponseEntity<Page<BarbeiroDadosListagem>> buscarPorAtivoPaginada(@PageableDefault(size = 5, sort = {"nome"}) Pageable paginacao){
+        var page = service.findAllByAtivoTrue(paginacao).map(BarbeiroDadosListagem::new);
         return ResponseEntity.ok(page);
     }
 

@@ -1,4 +1,4 @@
-package com.api.barbearia.infra.exception;
+package com.api.barbearia.infra.exceptions;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;

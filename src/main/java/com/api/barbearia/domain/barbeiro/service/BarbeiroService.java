@@ -1,12 +1,13 @@
-package com.api.barbearia.domain.barbeiro.service;
+package com.api.barbearia.domain.barbeiro1.service;
 
 import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosCadastrais;
-import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosListagem;
 import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosDetalhado;
-import com.api.barbearia.controller.barbeiro.resource.exception.ResourceNotFoundException;
+import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosListagem;
 import com.api.barbearia.domain.barbeiro.entity.Barbeiro;
 import com.api.barbearia.domain.barbeiro.repository.BarbeiroRepository;
-import com.api.barbearia.domain.barbeiro.service.exception.ObjectNotFoundException;
+import com.api.barbearia.infra.exceptions.exception.ObjectNotFoundExceptionService;
+import com.api.barbearia.infra.exceptions.exception.ObjectNotFoundException;
+import com.api.barbearia.infra.exceptions.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,7 +23,18 @@ public class BarbeiroService {
     @Autowired
     private BarbeiroRepository repository;
 
-    public Barbeiro salvar(BarbeiroDadosCadastrais dados){
+    public Barbeiro salvar(BarbeiroDadosCadastrais dados) {
+
+        boolean emailExiste = repository.existsByEmail(dados.email());
+        if (emailExiste){
+            throw new ObjectNotFoundExceptionService("Email existe");
+        }
+
+        boolean foneExiste = repository.existsByTelefone(dados.telefone());
+        if (foneExiste){
+            throw new ObjectNotFoundExceptionService("Telefone existe");
+        }
+
         var obj = new Barbeiro(dados);
         obj = repository.save(new Barbeiro(dados));
         return obj;
@@ -64,19 +76,22 @@ public class BarbeiroService {
 
     public void barbeiroDesativo(Long id){
         var obj = repository.getReferenceById(id);
-        if (atualizar(id).getAtivo() == true){
+        if (referencia(id).getAtivo() == true){
             obj.barbeiroDesativo();
         } else {
             throw new ResourceNotFoundException(id);
         }
     }
 
+    public Page<Barbeiro> findAllByAtivoTrue(Pageable paginacao) {
+        return repository.findAllByAtivoTrue(paginacao);
+    }
     public Page<Barbeiro> buscarPorAtivoPaginada(Pageable paginacao){
         return repository.findAllByAtivoTrue(paginacao);
     }
 
     //METODO DE REFERENCIA PARA ATUALIZAR E DELETAR
-    public Barbeiro getReferenceById(Long id) {
+    public Barbeiro referencia(Long id) {
         Optional<Barbeiro> obj = Optional.of(repository.getReferenceById(id));
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado" + Barbeiro.class));
     }

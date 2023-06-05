@@ -1,6 +1,6 @@
-package com.api.barbearia.endereco.model;
+package com.api.barbearia.domain.endereco.model;
 
-import com.api.barbearia.endereco.dto.DadosEndereco;
+import com.api.barbearia.domain.endereco.dto.DadosEndereco;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

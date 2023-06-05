@@ -1,8 +1,7 @@
-package com.api.barbearia.domain.barbeiro.entity;
+package com.api.barbearia.domain.cliente.entity;
 
-import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosAtualizacao;
-import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosCadastrais;
-import com.api.barbearia.domain.barbeiro.enums.Especialidade;
+import com.api.barbearia.controller.cliente.dto.ClienteDadosAtualizacao;
+import com.api.barbearia.controller.cliente.dto.ClienteDadosCadastrais;
 import com.api.barbearia.domain.endereco.model.Endereco;
 import jakarta.persistence.*;
 import lombok.*;
@@ -10,32 +9,29 @@ import lombok.*;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "Barbeiro")
-@Table(name = "barbeiros")
+@Entity(name = "Cliente")
+@Table(name = "clientes")
 @EqualsAndHashCode(of = "id")
-public class Barbeiro {
+public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private String email;
     private String telefone;
-    @Enumerated(EnumType.STRING)
-    private Especialidade especialidade;
     @Embedded
     private Endereco endereco;
     private Boolean ativo;
 
-    public Barbeiro(BarbeiroDadosCadastrais dados) {
+    public Cliente(ClienteDadosCadastrais dados) {
         this.ativo = true;
         this.nome = dados.nome();
         this.email = dados.email();
         this.telefone = dados.telefone();
-        this.especialidade = dados.especialidade();
         this.endereco = new Endereco(dados.endereco());
     }
 
-    public void atualizarInformacoes(BarbeiroDadosAtualizacao dados) {
+    public void atualizarInformacoes(ClienteDadosAtualizacao dados) {
         if (dados.nome() != null) {
             this.nome = dados.nome();
         }
@@ -47,7 +43,7 @@ public class Barbeiro {
         }
     }
 
-    public void barbeiroDesativo() {
+    public void clienteDesativo() {
         this.ativo = false;
     }
 }

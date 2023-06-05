@@ -1,9 +1,9 @@
-package com.api.barbearia.controller.barbeiro.dto;
+package com.api.barbearia.controller.cliente.dto;
 
 import com.api.barbearia.domain.endereco.dto.DadosEndereco;
 import jakarta.validation.constraints.NotNull;
 
-public record BarbeiroDadosAtualizacao(
+public record ClienteDadosAtualizacao(
        @NotNull
        Long id,
        String nome,
