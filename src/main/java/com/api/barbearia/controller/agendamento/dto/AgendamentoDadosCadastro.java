@@ -14,5 +14,5 @@ public record AgendamentoDadosCadastro(
         @Future
         LocalDateTime data,
         Especialidade especialidade
-) {
-}
+)
+{ }
