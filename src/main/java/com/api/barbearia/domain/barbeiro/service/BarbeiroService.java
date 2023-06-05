@@ -5,8 +5,9 @@ import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosDetalhado;
 import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosListagem;
 import com.api.barbearia.domain.barbeiro.entity.Barbeiro;
 import com.api.barbearia.domain.barbeiro.repository.BarbeiroRepository;
-import com.api.barbearia.infra.exception.ObjectNotFoundException;
-import com.api.barbearia.infra.exception.ResourceNotFoundException;
+import com.api.barbearia.infra.exceptions.exception.ObjectNotFoundExceptionService;
+import com.api.barbearia.infra.exceptions.exception.ObjectNotFoundException;
+import com.api.barbearia.infra.exceptions.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,12 +27,12 @@ public class BarbeiroService {
 
         boolean emailExiste = repository.existsByEmail(dados.email());
         if (emailExiste){
-            throw new ObjectNotFoundException("Email existe");
+            throw new ObjectNotFoundExceptionService("Email existe");
         }
 
         boolean foneExiste = repository.existsByTelefone(dados.telefone());
         if (foneExiste){
-            throw new ObjectNotFoundException("Telefone existe");
+            throw new ObjectNotFoundExceptionService("Telefone existe");
         }
 
         var obj = new Barbeiro(dados);

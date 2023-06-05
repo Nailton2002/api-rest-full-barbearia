@@ -5,8 +5,9 @@ import com.api.barbearia.controller.cliente.dto.ClienteDadosDetalhado;
 import com.api.barbearia.controller.cliente.dto.ClienteDadosListagem;
 import com.api.barbearia.domain.cliente.entity.Cliente;
 import com.api.barbearia.domain.cliente.repository.ClienteRepository;
-import com.api.barbearia.infra.exception.ObjectNotFoundException;
-import com.api.barbearia.infra.exception.ResourceNotFoundException;
+import com.api.barbearia.infra.exceptions.exception.ObjectNotFoundExceptionService;
+import com.api.barbearia.infra.exceptions.exception.ObjectNotFoundException;
+import com.api.barbearia.infra.exceptions.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +25,17 @@ public class ClienteService {
 
 
     public Cliente salvar (ClienteDadosCadastrais dados) {
+
+        boolean emailExiste = repository.existsByEmail(dados.email());
+        if (emailExiste){
+            throw new ObjectNotFoundExceptionService("Email existe na base de dados!");
+        }
+
+        boolean foneExiste =  repository.existsByTelefone(dados.telefone());
+        if (foneExiste){
+            throw new ObjectNotFoundExceptionService("Telefone existe na base de dados!");
+        }
+
         var obj = new Cliente(dados);
         obj = repository.save(new Cliente(dados));
         return obj;

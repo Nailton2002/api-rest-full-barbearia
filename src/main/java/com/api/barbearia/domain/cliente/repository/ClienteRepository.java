@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
-
+    
     Page<Cliente> findAllByAtivoTrue(Pageable paginacao);
 
     @Query(value = "select c from Cliente c where c.nome like %?1%")
@@ -22,4 +22,6 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
             c.id = :id
             """)
     Boolean findAtivoById(Long id);
+    boolean existsByEmail(String email);
+    boolean existsByTelefone(String telefone);
 }
