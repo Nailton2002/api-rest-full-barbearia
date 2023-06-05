@@ -1,4 +1,4 @@
-package com.api.barbearia.infra.exception;
+package com.api.barbearia.infra.exceptions.exception;
 
 public class ObjectNotFoundException extends RuntimeException {
     private static final long serialVersionUID = 1L;
