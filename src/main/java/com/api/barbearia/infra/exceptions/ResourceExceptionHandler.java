@@ -1,5 +1,6 @@
 package com.api.barbearia.infra.exceptions;
 
+import com.api.barbearia.domain.agendamento.exception.ValidacaoException;
 import com.api.barbearia.infra.exceptions.exception.ObjectNotFoundException;
 import com.api.barbearia.infra.exceptions.exception.ObjectNotFoundExceptionService;
 import com.api.barbearia.infra.exceptions.exception.ResourceNotFoundException;
@@ -29,6 +30,13 @@ public class ResourceExceptionHandler{
 	}
 	@ExceptionHandler(ObjectNotFoundExceptionService.class)
 	public ResponseEntity<StandardError> objectNotFound(ObjectNotFoundExceptionService e, HttpServletRequest request) {
+		String error = "Object not found";
+		HttpStatus status = HttpStatus.NOT_FOUND;
+		StandardError erro = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(status).body(erro);
+	}
+	@ExceptionHandler(ValidacaoException.class)
+	public ResponseEntity<StandardError> objectNotFound(ValidacaoException e, HttpServletRequest request) {
 		String error = "Object not found";
 		HttpStatus status = HttpStatus.NOT_FOUND;
 		StandardError erro = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
