@@ -20,11 +20,17 @@ ___
 - [x] CRUD de Cliente;
 - [x] Agendamento dos cortes;
 - [x] Cancelamento dos agendamentos.
+- [x] Configuração, segurança e TOKEN do Usuario;
 ___
 
 ## 📄 Documentação
 
-Usei o padrão de projeto "Strategy".
+- **[Spring Doc](https://springdoc.org/)**
+- **[Swagger UI](https://swagger.io/tools/swagger-ui/)**
+
+---
+
+## Usei o padrão de projeto "Strategy".
 
 Princípios do SOLID
 Apliquei os principios do SOLID, de uma vez, três princípios do SOLID, que é uma lista com cinco princípios de boas práticas de programação orientada a objetos.
