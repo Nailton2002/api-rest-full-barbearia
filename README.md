@@ -1,5 +1,5 @@
-# api-rest-full-barbearia
-
+## 💻 Sobre o projeto  api-rest-full-barbearia
+---
 ## 🛠 Tecnologias
 
 As seguintes tecnologias foram utilizadas no desenvolvimento da API Rest do projeto:
@@ -19,7 +19,7 @@ As seguintes tecnologias foram utilizadas no desenvolvimento da API Rest do proj
 - [x] Agendamento dos cortes;
 - [x] Cancelamento dos agendamentos.
 
-
+## 📄 Documentação
 
 Usei o padrão de projeto "Strategy".
 
