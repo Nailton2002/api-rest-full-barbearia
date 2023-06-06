@@ -21,10 +21,28 @@ public interface BarbeiroRepository extends JpaRepository<Barbeiro, Long> {
     List<Barbeiro> findByNome(String nome);
 
     @Query("""
-            select b.ativo
-            from Barbeiro b
+            select b.ativo from Barbeiro b
             where
             b.id = :id
             """)
     Boolean findAtivoById(Long id);
+
+    @Query("""
+            select b from Barbeiro b
+            where
+            b.ativo = true
+            and
+            b.especialidade = :especialidade
+            and
+            b.id not in(
+                select a.barbeiro.id from Agendamento a
+                where
+                a.data = :data
+                and
+                a.motivoCancelamento is null
+            )
+            order by rand()
+            limit 1
+        """)
+    Barbeiro escolherBarbeiroAleatorioLivreNaData(Especialidade especialidade, LocalDateTime data);
 }

@@ -1,13 +1,13 @@
 package com.api.barbearia.domain.cliente.service;
 
-import com.api.barbearia.controller.cliente.dto.ClienteDadosCadastrais;
-import com.api.barbearia.controller.cliente.dto.ClienteDadosDetalhado;
-import com.api.barbearia.controller.cliente.dto.ClienteDadosListagem;
+import com.api.barbearia.application.cliente.dto.ClienteDadosCadastrais;
+import com.api.barbearia.application.cliente.dto.ClienteDadosDetalhado;
+import com.api.barbearia.application.cliente.dto.ClienteDadosListagem;
 import com.api.barbearia.domain.cliente.entity.Cliente;
 import com.api.barbearia.domain.cliente.repository.ClienteRepository;
-import com.api.barbearia.infra.exceptions.exception.ObjectNotFoundExceptionService;
-import com.api.barbearia.infra.exceptions.exception.ObjectNotFoundException;
-import com.api.barbearia.infra.exceptions.exception.ResourceNotFoundException;
+import com.api.barbearia.infra.exceptions.validation.ObjectNotFoundExceptionService;
+import com.api.barbearia.infra.exceptions.validation.ObjectNotFoundException;
+import com.api.barbearia.infra.exceptions.validation.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

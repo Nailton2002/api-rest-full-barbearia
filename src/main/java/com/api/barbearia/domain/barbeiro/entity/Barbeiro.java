@@ -1,7 +1,7 @@
 package com.api.barbearia.domain.barbeiro.entity;
 
-import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosAtualizacao;
-import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosCadastrais;
+import com.api.barbearia.application.barbeiro.dto.BarbeiroDadosAtualizacao;
+import com.api.barbearia.application.barbeiro.dto.BarbeiroDadosCadastrais;
 import com.api.barbearia.domain.barbeiro.enums.Especialidade;
 import com.api.barbearia.domain.endereco.model.Endereco;
 import jakarta.persistence.*;
