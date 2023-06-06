@@ -1,12 +1,13 @@
-package com.api.barbearia.controller.barbeiro.resource;
+package com.api.barbearia.application.barbeiro.resource;
 
-import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosAtualizacao;
-import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosCadastrais;
-import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosDetalhado;
-import com.api.barbearia.controller.barbeiro.dto.BarbeiroDadosListagem;
+import com.api.barbearia.application.barbeiro.dto.BarbeiroDadosAtualizacao;
+import com.api.barbearia.application.barbeiro.dto.BarbeiroDadosCadastrais;
+import com.api.barbearia.application.barbeiro.dto.BarbeiroDadosDetalhado;
+import com.api.barbearia.application.barbeiro.dto.BarbeiroDadosListagem;
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -18,6 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
 
 @RestController
+@Profile("dev")
 @RequestMapping("/barbeiros")
 public class BarbeiroResource {
 

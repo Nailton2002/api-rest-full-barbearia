@@ -1,7 +1,7 @@
 package com.api.barbearia.domain.cliente.entity;
 
-import com.api.barbearia.controller.cliente.dto.ClienteDadosAtualizacao;
-import com.api.barbearia.controller.cliente.dto.ClienteDadosCadastrais;
+import com.api.barbearia.application.cliente.dto.ClienteDadosAtualizacao;
+import com.api.barbearia.application.cliente.dto.ClienteDadosCadastrais;
 import com.api.barbearia.domain.endereco.model.Endereco;
 import jakarta.persistence.*;
 import lombok.*;

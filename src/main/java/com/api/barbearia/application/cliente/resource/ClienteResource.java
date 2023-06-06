@@ -1,14 +1,15 @@
-package com.api.barbearia.controller.cliente.resource;
+package com.api.barbearia.application.cliente.resource;
 
-import com.api.barbearia.controller.cliente.dto.ClienteDadosAtualizacao;
-import com.api.barbearia.controller.cliente.dto.ClienteDadosCadastrais;
-import com.api.barbearia.controller.cliente.dto.ClienteDadosDetalhado;
-import com.api.barbearia.controller.cliente.dto.ClienteDadosListagem;
+import com.api.barbearia.application.cliente.dto.ClienteDadosAtualizacao;
+import com.api.barbearia.application.cliente.dto.ClienteDadosCadastrais;
+import com.api.barbearia.application.cliente.dto.ClienteDadosDetalhado;
+import com.api.barbearia.application.cliente.dto.ClienteDadosListagem;
 import com.api.barbearia.domain.cliente.service.ClienteService;
 
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -20,6 +21,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
 
 @RestController
+@Profile("dev")
 @RequestMapping("/clientes")
 public class ClienteResource {
 

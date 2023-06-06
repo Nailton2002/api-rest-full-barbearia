@@ -1,4 +1,4 @@
-package com.api.barbearia.controller.agendamento.dto;
+package com.api.barbearia.application.agendamento.dto;
 
 import com.api.barbearia.domain.agendamento.enums.MotivoCancelamento;
 import jakarta.validation.constraints.NotNull;

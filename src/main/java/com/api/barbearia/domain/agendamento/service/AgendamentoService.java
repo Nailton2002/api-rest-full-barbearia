@@ -1,8 +1,8 @@
 package com.api.barbearia.domain.agendamento.service;
 
-import com.api.barbearia.controller.agendamento.dto.AgendamentoDadosCadastro;
-import com.api.barbearia.controller.agendamento.dto.AgendamentoDadosCancelamento;
-import com.api.barbearia.controller.agendamento.dto.AgendamentoDadosDetalhados;
+import com.api.barbearia.application.agendamento.dto.AgendamentoDadosCadastro;
+import com.api.barbearia.application.agendamento.dto.AgendamentoDadosCancelamento;
+import com.api.barbearia.application.agendamento.dto.AgendamentoDadosDetalhados;
 import com.api.barbearia.domain.agendamento.entity.Agendamento;
 import com.api.barbearia.domain.agendamento.exception.ValidacaoException;
 import com.api.barbearia.domain.agendamento.repository.AgendamentoRepository;

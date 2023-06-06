@@ -1,4 +1,4 @@
-package com.api.barbearia.controller.barbeiro.dto;
+package com.api.barbearia.application.barbeiro.dto;
 
 import com.api.barbearia.domain.barbeiro.enums.Especialidade;
 import com.api.barbearia.domain.endereco.dto.DadosEndereco;

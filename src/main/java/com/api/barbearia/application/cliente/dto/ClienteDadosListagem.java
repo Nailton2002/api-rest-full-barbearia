@@ -1,4 +1,4 @@
-package com.api.barbearia.controller.cliente.dto;
+package com.api.barbearia.application.cliente.dto;
 
 
 import com.api.barbearia.domain.cliente.entity.Cliente;

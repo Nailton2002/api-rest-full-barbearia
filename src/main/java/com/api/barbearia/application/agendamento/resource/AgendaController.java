@@ -1,16 +1,18 @@
-package com.api.barbearia.controller.agendamento.resource;
+package com.api.barbearia.application.agendamento.resource;
 
-import com.api.barbearia.controller.agendamento.dto.AgendamentoDadosCadastro;
-import com.api.barbearia.controller.agendamento.dto.AgendamentoDadosCancelamento;
+import com.api.barbearia.application.agendamento.dto.AgendamentoDadosCadastro;
+import com.api.barbearia.application.agendamento.dto.AgendamentoDadosCancelamento;
 import com.api.barbearia.domain.agendamento.service.AgendamentoService;
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@Profile("dev")
 @RequestMapping("/agendamentos")
 public class AgendaController {
 
