@@ -1,9 +1,9 @@
 package com.api.barbearia.infra.exceptions;
 
 import com.api.barbearia.domain.agendamento.exception.ValidacaoException;
-import com.api.barbearia.infra.exceptions.exception.ObjectNotFoundException;
-import com.api.barbearia.infra.exceptions.exception.ObjectNotFoundExceptionService;
-import com.api.barbearia.infra.exceptions.exception.ResourceNotFoundException;
+import com.api.barbearia.infra.exceptions.validation.ObjectNotFoundException;
+import com.api.barbearia.infra.exceptions.validation.ObjectNotFoundExceptionService;
+import com.api.barbearia.infra.exceptions.validation.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

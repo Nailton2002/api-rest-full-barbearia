@@ -1,6 +1,6 @@
 package com.api.barbearia.domain.agendamento.validations.agendamento;
 
-import com.api.barbearia.controller.agendamento.dto.AgendamentoDadosCadastro;
+import com.api.barbearia.application.agendamento.dto.AgendamentoDadosCadastro;
 
 //USANDO O POLIMORFISMO
 //Princípios do SOLID

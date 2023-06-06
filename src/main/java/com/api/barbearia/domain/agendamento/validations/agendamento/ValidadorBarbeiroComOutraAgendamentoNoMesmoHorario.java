@@ -1,6 +1,6 @@
 package com.api.barbearia.domain.agendamento.validations.agendamento;
 
-import com.api.barbearia.controller.agendamento.dto.AgendamentoDadosCadastro;
+import com.api.barbearia.application.agendamento.dto.AgendamentoDadosCadastro;
 import com.api.barbearia.domain.agendamento.exception.ValidacaoException;
 import com.api.barbearia.domain.agendamento.repository.AgendamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
