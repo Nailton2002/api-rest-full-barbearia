@@ -1,4 +1,4 @@
-package com.api.barbearia.domain.barbeiro1.service;
+package com.api.barbearia.domain.barbeiro.service;
 
 import com.api.barbearia.application.barbeiro.dto.BarbeiroDadosCadastrais;
 import com.api.barbearia.application.barbeiro.dto.BarbeiroDadosDetalhado;

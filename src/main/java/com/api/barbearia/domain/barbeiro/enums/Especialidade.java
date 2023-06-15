@@ -1,7 +1,3 @@
 package com.api.barbearia.domain.barbeiro.enums;
 
-public enum Especialidade {
-    CABELEREIRO,
-    BARBEIRO,
-    OUTROS;
-}
+public enum Especialidade { CABELEREIRO, BARBEIRO, OUTROS; }
