@@ -5,7 +5,7 @@ ___
 
 As seguintes tecnologias foram utilizadas no desenvolvimento da API Rest do projeto:
 
-- **[Java 17](https://www.oracle.com/java)**
+- **[Java 17](https://www.oracle.com/java/technologies/downloads/#java17)**
 - **[Spring Boot 3](https://spring.io/projects/spring-boot)**
 - **[Maven](https://maven.apache.org)**
 - **[MySQL](https://www.mysql.com)**

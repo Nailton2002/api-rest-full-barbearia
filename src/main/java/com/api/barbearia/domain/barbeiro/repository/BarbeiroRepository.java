@@ -24,6 +24,9 @@ public interface BarbeiroRepository extends JpaRepository<Barbeiro, Long> {
     @Query(value = "select b from Barbeiro b where b.nome like %?1%")
     List<Barbeiro> findByNome(String nome);
 
+//    @Query("SELECT t FROM Tecnico t WHERE LOWER(t.nome) = LOWER(:nome)")
+//    List<Barbeiro> findByNome(String nome);
+
 //    @Query("Select b from Barbeiro where b.nome = : nome")
 //    List<Barbeiro> findByNomeParam(@Param("nome") String nome);
 //
