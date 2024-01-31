@@ -1,6 +1,6 @@
 package com.api.barbearia.infra.exceptions;
 
-import com.api.barbearia.domain.agendamento.exception.ValidacaoException;
+import com.api.barbearia.infra.agendamento.exception.ValidacaoException;
 import com.api.barbearia.infra.exceptions.validation.ObjectNotFoundException;
 import com.api.barbearia.infra.exceptions.validation.ObjectNotFoundExceptionService;
 import com.api.barbearia.infra.exceptions.validation.ResourceNotFoundException;
