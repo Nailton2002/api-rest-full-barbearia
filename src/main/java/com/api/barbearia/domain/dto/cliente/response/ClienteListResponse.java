@@ -1,13 +1,12 @@
-package com.api.barbearia.domain.dto.cliente;
+package com.api.barbearia.domain.dto.cliente.response;
 
 
 import com.api.barbearia.domain.entity.cliente.Cliente;
 
-public record ClienteDadosListagem(
+public record ClienteListResponse(
         Long id, Boolean ativo, String nome, String email
 ) {
-    public ClienteDadosListagem(Cliente obj) {
-
+    public ClienteListResponse(Cliente obj) {
         this(obj.getId(), obj.getAtivo(), obj.getNome(), obj.getEmail());
     }
 }

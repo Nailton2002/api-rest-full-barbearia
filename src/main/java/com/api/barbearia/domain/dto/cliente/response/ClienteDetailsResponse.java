@@ -1,9 +1,9 @@
-package com.api.barbearia.domain.dto.cliente;
+package com.api.barbearia.domain.dto.cliente.response;
 
 import com.api.barbearia.domain.entity.cliente.Cliente;
 import com.api.barbearia.domain.model.Endereco;
 
-public record ClienteDadosDetalhado(
+public record ClienteDetailsResponse(
         Long id,
         Boolean ativo,
         String nome,
@@ -11,7 +11,7 @@ public record ClienteDadosDetalhado(
         String telefone,
         Endereco endereco
 ) {
-    public ClienteDadosDetalhado(Cliente obj){
+    public ClienteDetailsResponse(Cliente obj){
         this(obj.getId(), obj.getAtivo(), obj.getNome(), obj.getEmail(), obj.getTelefone(), obj.getEndereco());
     }
 

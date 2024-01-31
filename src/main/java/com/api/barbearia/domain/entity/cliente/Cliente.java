@@ -1,14 +1,12 @@
 package com.api.barbearia.domain.entity.cliente;
 
-import com.api.barbearia.domain.dto.cliente.ClienteDadosAtualizacao;
-import com.api.barbearia.domain.dto.cliente.ClienteDadosCadastrais;
+import com.api.barbearia.domain.dto.cliente.request.ClienteUpdateRequest;
+import com.api.barbearia.domain.dto.cliente.request.ClienteSaveRequest;
 import com.api.barbearia.domain.model.Endereco;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Getter @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 @Entity(name = "Cliente")
 @Table(name = "clientes")
 @EqualsAndHashCode(of = "id")
@@ -23,23 +21,23 @@ public class Cliente {
     private Endereco endereco;
     private Boolean ativo;
 
-    public Cliente(ClienteDadosCadastrais dados) {
+    public Cliente(ClienteSaveRequest request) {
         this.ativo = true;
-        this.nome = dados.nome();
-        this.email = dados.email();
-        this.telefone = dados.telefone();
-        this.endereco = new Endereco(dados.endereco());
+        this.nome = request.nome();
+        this.email = request.email();
+        this.telefone = request.telefone();
+        this.endereco = new Endereco(request.endereco());
     }
 
-    public void atualizarInformacoes(ClienteDadosAtualizacao dados) {
-        if (dados.nome() != null) {
-            this.nome = dados.nome();
+    public void atualizarInformacoes(ClienteUpdateRequest request) {
+        if (request.nome() != null) {
+            this.nome = request.nome();
         }
-        if (dados.telefone() != null) {
-            this.telefone = dados.telefone();
+        if (request.telefone() != null) {
+            this.telefone = request.telefone();
         }
-        if (dados.endereco() != null) {
-            this.endereco.atualizarInformacoes(dados.endereco());
+        if (request.endereco() != null) {
+            this.endereco.atualizarInformacoes(request.endereco());
         }
     }
 

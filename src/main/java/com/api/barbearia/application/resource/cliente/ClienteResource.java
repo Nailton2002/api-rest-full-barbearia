@@ -1,9 +1,10 @@
 package com.api.barbearia.application.resource.cliente;
 
-import com.api.barbearia.domain.dto.cliente.ClienteDadosAtualizacao;
-import com.api.barbearia.domain.dto.cliente.ClienteDadosCadastrais;
-import com.api.barbearia.domain.dto.cliente.ClienteDadosDetalhado;
-import com.api.barbearia.domain.dto.cliente.ClienteDadosListagem;
+import com.api.barbearia.domain.dto.cliente.request.ClienteUpdateRequest;
+import com.api.barbearia.domain.dto.cliente.request.ClienteSaveRequest;
+import com.api.barbearia.domain.dto.cliente.response.ClienteDetailsResponse;
+import com.api.barbearia.domain.dto.cliente.response.ClienteListResponse;
+import com.api.barbearia.domain.entity.cliente.Cliente;
 import com.api.barbearia.domain.service.cliente.ClienteService;
 
 import jakarta.validation.Valid;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @Profile("dev")
@@ -30,78 +32,56 @@ public class ClienteResource {
 
     @Transactional
     @PostMapping
-    public ResponseEntity create(@RequestBody @Valid ClienteDadosCadastrais dados, UriComponentsBuilder uriComponentsBuilder){
+    public ResponseEntity create(@RequestBody @Valid ClienteSaveRequest dados, UriComponentsBuilder uriComponentsBuilder) {
         var obj = service.salvar(dados);
         var uri = uriComponentsBuilder.path("/clientes/{id}").buildAndExpand(obj.getId()).toUri();
-        return ResponseEntity.created(uri).body(new ClienteDadosDetalhado(obj));
+        return ResponseEntity.created(uri).body(new ClienteDetailsResponse(obj));
     }
 
     @Transactional
     @PutMapping("/{id}")
-    public ResponseEntity atulizar(@RequestBody @Valid ClienteDadosAtualizacao dados){
-        var obj = service.atualizar(dados.id());
-        obj.atualizarInformacoes(dados);
-        return ResponseEntity.ok(new ClienteDadosDetalhado(obj));
+    public ResponseEntity atulizar(@PathVariable Long id, @RequestBody @Valid ClienteUpdateRequest request) {
+        var obj = service.atualizar(id, request);
+        return ResponseEntity.ok(new ClienteDetailsResponse(obj));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ClienteDadosDetalhado> buscarPorId(@PathVariable Long id){
-        ClienteDadosDetalhado dados = service.buscarPorId(id);
-        return ResponseEntity.ok().body(dados);
+    public ResponseEntity<ClienteDetailsResponse> buscarPorId(@PathVariable Long id) {
+        Cliente obj = service.buscarPorId(id);
+        return ResponseEntity.ok().body(new ClienteDetailsResponse(obj));
     }
 
     @GetMapping("/porNomes")
-    public ResponseEntity<List<ClienteDadosDetalhado>> buscarPorNome(@RequestParam(name = "nome") String nome){
-        List<ClienteDadosDetalhado> dados = service.buscarPorNome(nome);
-        return ResponseEntity.ok().body(dados);
+    public ResponseEntity<List<ClienteDetailsResponse>> buscarPorNome(@RequestParam(name = "nome") String nome) {
+        List<ClienteDetailsResponse> responseList = service.buscarPorNome(nome).stream().map(c -> new ClienteDetailsResponse(c)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(responseList);
     }
 
     @GetMapping
-    public ResponseEntity<List<ClienteDadosListagem>> listar(){
-        List<ClienteDadosListagem> dadosList = service.buscarTodos();
+    public ResponseEntity<List<ClienteListResponse>> listar() {
+        List<ClienteListResponse> dadosList = service.buscarTodos().stream().map(c -> new ClienteListResponse(c)).collect(Collectors.toList());
         return ResponseEntity.ok().body(dadosList);
     }
 
     @GetMapping(value = "/paginados")
-    public ResponseEntity<Page<ClienteDadosListagem>> buscarPorAtivoPaginada(@PageableDefault(size = 5, sort = {"nome"}) Pageable paginacao){
-        var page = service.buscarPorAtivoPaginada(paginacao).map(ClienteDadosListagem::new);
+    public ResponseEntity<Page<ClienteListResponse>> buscarPorAtivoPaginada(@PageableDefault(size = 5, sort = {"nome"}) Pageable paginacao) {
+        var page = service.buscarPorAtivoPaginada(paginacao).map(ClienteListResponse::new);
         return ResponseEntity.ok(page);
     }
 
     @Transactional
     @DeleteMapping("/desativos/{id}")
-    public ResponseEntity clienteDesativo(@PathVariable Long id){
+    public ResponseEntity clienteDesativo(@PathVariable Long id) {
         service.clienteDesativo(id);
         return ResponseEntity.noContent().build();
     }
 
     @Transactional
     @DeleteMapping("/{id}")
-    public ResponseEntity deletar(@PathVariable Long id){
+    public ResponseEntity deletar(@PathVariable Long id) {
         service.deletar(id);
         return ResponseEntity.noContent().build();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }
