@@ -7,6 +7,7 @@ import com.api.barbearia.domain.endereco.model.Endereco;
 import jakarta.persistence.*;
 import lombok.*;
 
+@ToString
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
