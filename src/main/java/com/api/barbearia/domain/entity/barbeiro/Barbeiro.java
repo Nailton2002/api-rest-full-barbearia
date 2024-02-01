@@ -1,16 +1,13 @@
 package com.api.barbearia.domain.entity.barbeiro;
 
-import com.api.barbearia.domain.dto.barbeiro.BarbeiroDadosAtualizacao;
-import com.api.barbearia.domain.dto.barbeiro.BarbeiroDadosCadastrais;
+import com.api.barbearia.domain.dto.barbeiro.request.BarbeiroUpRequest;
+import com.api.barbearia.domain.dto.barbeiro.request.BarbeiroRequest;
 import com.api.barbearia.domain.enums.barbeiro.Especialidade;
 import com.api.barbearia.domain.model.Endereco;
 import jakarta.persistence.*;
 import lombok.*;
 
-@ToString
-@Getter @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 @Entity(name = "Barbeiro")
 @Table(name = "barbeiros")
 @EqualsAndHashCode(of = "id")
@@ -27,7 +24,7 @@ public class Barbeiro {
     private Endereco endereco;
     private Boolean ativo;
 
-    public Barbeiro(BarbeiroDadosCadastrais dados) {
+    public Barbeiro(BarbeiroRequest dados) {
         this.ativo = true;
         this.nome = dados.nome();
         this.email = dados.email();
@@ -36,7 +33,7 @@ public class Barbeiro {
         this.endereco = new Endereco(dados.endereco());
     }
 
-    public void atualizarInformacoes(BarbeiroDadosAtualizacao dados) {
+    public void atualizarInformacoes(BarbeiroUpRequest dados) {
         if (dados.nome() != null) {
             this.nome = dados.nome();
         }

@@ -1,8 +1,9 @@
 package com.api.barbearia.domain.service.barbeiro;
 
-import com.api.barbearia.domain.dto.barbeiro.BarbeiroDadosCadastrais;
-import com.api.barbearia.domain.dto.barbeiro.BarbeiroDadosDetalhado;
-import com.api.barbearia.domain.dto.barbeiro.BarbeiroDadosListagem;
+import com.api.barbearia.domain.dto.barbeiro.request.BarbeiroRequest;
+import com.api.barbearia.domain.dto.barbeiro.request.BarbeiroUpRequest;
+import com.api.barbearia.domain.dto.barbeiro.response.BarbeiroResponse;
+import com.api.barbearia.domain.dto.barbeiro.response.BarbeiroListResponse;
 import com.api.barbearia.domain.entity.barbeiro.Barbeiro;
 import com.api.barbearia.domain.repository.barbeiro.BarbeiroRepository;
 import com.api.barbearia.infra.exceptions.validation.ObjectNotFoundExceptionService;
@@ -23,13 +24,13 @@ public class BarbeiroService {
     @Autowired
     private BarbeiroRepository repository;
 
-    public Barbeiro salvar(BarbeiroDadosCadastrais dados) {
+    public Barbeiro salvar(BarbeiroRequest dados) {
         boolean emailExiste = repository.existsByEmail(dados.email());
-        if (emailExiste){
+        if (emailExiste) {
             throw new ObjectNotFoundExceptionService("Email existe");
         }
         boolean foneExiste = repository.existsByTelefone(dados.telefone());
-        if (foneExiste){
+        if (foneExiste) {
             throw new ObjectNotFoundExceptionService("Telefone existe");
         }
         var obj = new Barbeiro(dados);
@@ -37,33 +38,28 @@ public class BarbeiroService {
         return obj;
     }
 
-    public BarbeiroDadosDetalhado buscarPorId(Long id){
-        var obj = repository.findById(id).orElseThrow(()-> new ObjectNotFoundException(id));
-        return new BarbeiroDadosDetalhado(obj);
+    public Barbeiro buscarPorId(Long id) {
+        var obj = repository.findById(id).orElseThrow(() -> new ObjectNotFoundException(id));
+        return obj;
     }
 
-    public List<BarbeiroDadosListagem> buscarTodos(){
+    public List<Barbeiro> buscarTodos() {
         List<Barbeiro> list = repository.findAll();
-        List<BarbeiroDadosListagem> dados = list.stream().map(b -> new BarbeiroDadosListagem(b)).collect(Collectors.toList());
-        return dados;
+        return list;
     }
 
-    public List<BarbeiroDadosDetalhado> findByNome(String nome) {
+    public List<Barbeiro> findByNome(String nome) {
         List<Barbeiro> list = repository.findByNome(nome);
-        List<BarbeiroDadosDetalhado> dados = list.stream().map(b -> new BarbeiroDadosDetalhado(b)).collect(Collectors.toList());
-        return dados;
+        return list;
     }
 
-    public Barbeiro atualizar(Long id) {
-        if (repository.getReferenceById(id).getAtivo()==true) {
-            Optional<Barbeiro> obj = Optional.of(repository.getReferenceById(id));
-            return obj.orElseThrow(()-> new ObjectNotFoundException(id));
-        } else {
-            throw new ObjectNotFoundException(id);
-        }
+    public Barbeiro atualizar(BarbeiroUpRequest upRequest) {
+        var objId = repository.getReferenceById(upRequest.id());
+        objId.atualizarInformacoes(upRequest);
+        return repository.save(objId);
     }
 
-    public void deletar(Long id){
+    public void deletar(Long id) {
         if (repository.existsById(id) == true) {
             repository.deleteById(id);
         } else {
@@ -71,9 +67,9 @@ public class BarbeiroService {
         }
     }
 
-    public void barbeiroDesativo(Long id){
+    public void barbeiroDesativo(Long id) {
         var obj = repository.getReferenceById(id);
-        if (referencia(id).getAtivo() == true){
+        if (referencia(id).getAtivo() == true) {
             obj.barbeiroDesativo();
         } else {
             throw new ResourceNotFoundException(id);
@@ -84,37 +80,12 @@ public class BarbeiroService {
         return repository.findAllByAtivoTrue(paginacao);
     }
 
-    public Page<Barbeiro> buscarPorAtivoPaginada(Pageable paginacao){ return repository.findAllByAtivoTrue(paginacao); }
+    public Page<Barbeiro> buscarPorAtivoPaginada(Pageable paginacao) {return repository.findAllByAtivoTrue(paginacao);}
 
     //METODO DE REFERENCIA PARA ATUALIZAR E DELETAR
     public Barbeiro referencia(Long id) {
         Optional<Barbeiro> obj = Optional.of(repository.getReferenceById(id));
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado" + Barbeiro.class));
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
