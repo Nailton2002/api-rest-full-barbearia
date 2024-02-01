@@ -1,4 +1,4 @@
-package com.api.barbearia.domain.dto.barbeiro;
+package com.api.barbearia.domain.dto.barbeiro.request;
 
 import com.api.barbearia.domain.enums.barbeiro.Especialidade;
 import com.api.barbearia.domain.dto.endereco.DadosEndereco;
@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public record BarbeiroDadosCadastrais(
+public record BarbeiroRequest(
         @NotBlank(message = "Nome é obrigatório")
         String nome,
         @Email(message = "Formato do email é inválido")
