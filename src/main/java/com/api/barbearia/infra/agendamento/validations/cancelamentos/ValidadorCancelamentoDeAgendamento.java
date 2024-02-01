@@ -1,7 +1,7 @@
 package com.api.barbearia.infra.agendamento.validations.cancelamentos;
 
-import com.api.barbearia.domain.dto.agendamento.AgendamentoDadosCancelamento;
+import com.api.barbearia.domain.dto.agendamento.request.AgendamentoCancelamentoRequeste;
 
 public interface ValidadorCancelamentoDeAgendamento {
-    void validar(AgendamentoDadosCancelamento dados);
+    void validar(AgendamentoCancelamentoRequeste request);
 }
