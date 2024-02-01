@@ -1,6 +1,6 @@
-package com.api.barbearia.domain.repository.agendamento;
+package com.api.barbearia.domain.repository;
 
-import com.api.barbearia.domain.entity.agendamento.Agendamento;
+import com.api.barbearia.domain.entity.Agendamento;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;

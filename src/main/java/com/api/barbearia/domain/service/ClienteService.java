@@ -1,11 +1,9 @@
-package com.api.barbearia.domain.service.cliente;
+package com.api.barbearia.domain.service;
 
 import com.api.barbearia.domain.dto.cliente.request.ClienteSaveRequest;
 import com.api.barbearia.domain.dto.cliente.request.ClienteUpdateRequest;
-import com.api.barbearia.domain.dto.cliente.response.ClienteDetailsResponse;
-import com.api.barbearia.domain.dto.cliente.response.ClienteListResponse;
-import com.api.barbearia.domain.entity.cliente.Cliente;
-import com.api.barbearia.domain.repository.cliente.ClienteRepository;
+import com.api.barbearia.domain.entity.Cliente;
+import com.api.barbearia.domain.repository.ClienteRepository;
 import com.api.barbearia.infra.exceptions.validation.ObjectNotFoundExceptionService;
 import com.api.barbearia.infra.exceptions.validation.ObjectNotFoundException;
 import com.api.barbearia.infra.exceptions.validation.ResourceNotFoundException;
@@ -17,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class ClienteService {

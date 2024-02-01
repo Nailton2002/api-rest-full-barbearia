@@ -1,6 +1,6 @@
 package com.api.barbearia.domain.dto.barbeiro.response;
 
-import com.api.barbearia.domain.entity.barbeiro.Barbeiro;
+import com.api.barbearia.domain.entity.Barbeiro;
 import com.api.barbearia.domain.enums.barbeiro.Especialidade;
 import com.api.barbearia.domain.model.Endereco;
 

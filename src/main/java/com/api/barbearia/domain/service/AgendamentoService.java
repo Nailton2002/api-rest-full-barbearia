@@ -1,16 +1,16 @@
-package com.api.barbearia.domain.service.agendamento;
+package com.api.barbearia.domain.service;
 
 import com.api.barbearia.domain.dto.agendamento.request.AgendamentoRequest;
 import com.api.barbearia.domain.dto.agendamento.request.AgendamentoCancelamentoRequeste;
 import com.api.barbearia.domain.dto.agendamento.response.AgendamentoResponse;
-import com.api.barbearia.domain.entity.agendamento.Agendamento;
+import com.api.barbearia.domain.entity.Agendamento;
 import com.api.barbearia.infra.agendamento.exception.ValidacaoException;
-import com.api.barbearia.domain.repository.agendamento.AgendamentoRepository;
+import com.api.barbearia.domain.repository.AgendamentoRepository;
 import com.api.barbearia.infra.agendamento.validations.agendamento.ValidadorAgendamento;
 import com.api.barbearia.infra.agendamento.validations.cancelamentos.ValidadorCancelamentoDeAgendamento;
-import com.api.barbearia.domain.entity.barbeiro.Barbeiro;
-import com.api.barbearia.domain.repository.barbeiro.BarbeiroRepository;
-import com.api.barbearia.domain.repository.cliente.ClienteRepository;
+import com.api.barbearia.domain.entity.Barbeiro;
+import com.api.barbearia.domain.repository.BarbeiroRepository;
+import com.api.barbearia.domain.repository.ClienteRepository;
 import com.api.barbearia.infra.exceptions.validation.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

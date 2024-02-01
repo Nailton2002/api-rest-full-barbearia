@@ -1,6 +1,6 @@
-package com.api.barbearia.domain.repository.cliente;
+package com.api.barbearia.domain.repository;
 
-import com.api.barbearia.domain.entity.cliente.Cliente;
+import com.api.barbearia.domain.entity.Cliente;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,4 +1,4 @@
-package com.api.barbearia.domain.entity.usuario;
+package com.api.barbearia.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

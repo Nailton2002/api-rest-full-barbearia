@@ -1,4 +1,4 @@
-package com.api.barbearia.domain.entity.cliente;
+package com.api.barbearia.domain.entity;
 
 import com.api.barbearia.domain.dto.cliente.request.ClienteUpdateRequest;
 import com.api.barbearia.domain.dto.cliente.request.ClienteSaveRequest;

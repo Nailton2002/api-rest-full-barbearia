@@ -1,6 +1,6 @@
 package com.api.barbearia.infra.security;
 
-import com.api.barbearia.domain.entity.usuario.Usuario;
+import com.api.barbearia.domain.entity.Usuario;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;

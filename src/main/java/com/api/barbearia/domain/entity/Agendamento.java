@@ -1,8 +1,6 @@
-package com.api.barbearia.domain.entity.agendamento;
+package com.api.barbearia.domain.entity;
 
 import com.api.barbearia.domain.enums.agendamento.MotivoCancelamento;
-import com.api.barbearia.domain.entity.barbeiro.Barbeiro;
-import com.api.barbearia.domain.entity.cliente.Cliente;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

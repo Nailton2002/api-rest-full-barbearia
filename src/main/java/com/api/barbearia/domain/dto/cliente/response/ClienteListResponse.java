@@ -1,7 +1,7 @@
 package com.api.barbearia.domain.dto.cliente.response;
 
 
-import com.api.barbearia.domain.entity.cliente.Cliente;
+import com.api.barbearia.domain.entity.Cliente;
 
 public record ClienteListResponse(
         Long id, Boolean ativo, String nome, String email

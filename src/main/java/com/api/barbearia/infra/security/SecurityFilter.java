@@ -1,6 +1,6 @@
 package com.api.barbearia.infra.security;
 
-import com.api.barbearia.domain.repository.usuario.UsuarioRepository;
+import com.api.barbearia.domain.repository.UsuarioRepository;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

@@ -1,11 +1,11 @@
-package com.api.barbearia.application.resource.cliente;
+package com.api.barbearia.application.resource;
 
 import com.api.barbearia.domain.dto.cliente.request.ClienteUpdateRequest;
 import com.api.barbearia.domain.dto.cliente.request.ClienteSaveRequest;
 import com.api.barbearia.domain.dto.cliente.response.ClienteDetailsResponse;
 import com.api.barbearia.domain.dto.cliente.response.ClienteListResponse;
-import com.api.barbearia.domain.entity.cliente.Cliente;
-import com.api.barbearia.domain.service.cliente.ClienteService;
+import com.api.barbearia.domain.entity.Cliente;
+import com.api.barbearia.domain.service.ClienteService;
 
 import jakarta.validation.Valid;
 

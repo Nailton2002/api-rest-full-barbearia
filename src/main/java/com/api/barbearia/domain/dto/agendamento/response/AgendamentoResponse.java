@@ -1,6 +1,6 @@
 package com.api.barbearia.domain.dto.agendamento.response;
 
-import com.api.barbearia.domain.entity.agendamento.Agendamento;
+import com.api.barbearia.domain.entity.Agendamento;
 
 import java.time.LocalDateTime;
 

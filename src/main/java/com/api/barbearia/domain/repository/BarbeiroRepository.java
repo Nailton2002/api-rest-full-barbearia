@@ -1,6 +1,6 @@
-package com.api.barbearia.domain.repository.barbeiro;
+package com.api.barbearia.domain.repository;
 
-import com.api.barbearia.domain.entity.barbeiro.Barbeiro;
+import com.api.barbearia.domain.entity.Barbeiro;
 import com.api.barbearia.domain.enums.barbeiro.Especialidade;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

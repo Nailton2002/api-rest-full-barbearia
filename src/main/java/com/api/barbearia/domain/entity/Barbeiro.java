@@ -1,4 +1,4 @@
-package com.api.barbearia.domain.entity.barbeiro;
+package com.api.barbearia.domain.entity;
 
 import com.api.barbearia.domain.dto.barbeiro.request.BarbeiroUpRequest;
 import com.api.barbearia.domain.dto.barbeiro.request.BarbeiroRequest;

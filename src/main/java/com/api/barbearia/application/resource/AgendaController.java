@@ -1,9 +1,9 @@
-package com.api.barbearia.application.resource.agendamento;
+package com.api.barbearia.application.resource;
 
 import com.api.barbearia.domain.dto.agendamento.request.AgendamentoRequest;
 import com.api.barbearia.domain.dto.agendamento.request.AgendamentoCancelamentoRequeste;
 import com.api.barbearia.domain.dto.agendamento.response.AgendamentoResponse;
-import com.api.barbearia.domain.service.agendamento.AgendamentoService;
+import com.api.barbearia.domain.service.AgendamentoService;
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;

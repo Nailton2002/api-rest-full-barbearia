@@ -1,11 +1,9 @@
-package com.api.barbearia.domain.service.barbeiro;
+package com.api.barbearia.domain.service;
 
 import com.api.barbearia.domain.dto.barbeiro.request.BarbeiroRequest;
 import com.api.barbearia.domain.dto.barbeiro.request.BarbeiroUpRequest;
-import com.api.barbearia.domain.dto.barbeiro.response.BarbeiroResponse;
-import com.api.barbearia.domain.dto.barbeiro.response.BarbeiroListResponse;
-import com.api.barbearia.domain.entity.barbeiro.Barbeiro;
-import com.api.barbearia.domain.repository.barbeiro.BarbeiroRepository;
+import com.api.barbearia.domain.entity.Barbeiro;
+import com.api.barbearia.domain.repository.BarbeiroRepository;
 import com.api.barbearia.infra.exceptions.validation.ObjectNotFoundExceptionService;
 import com.api.barbearia.infra.exceptions.validation.ObjectNotFoundException;
 import com.api.barbearia.infra.exceptions.validation.ResourceNotFoundException;
@@ -16,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class BarbeiroService {

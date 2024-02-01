@@ -1,6 +1,6 @@
-package com.api.barbearia.domain.repository.usuario;
+package com.api.barbearia.domain.repository;
 
-import com.api.barbearia.domain.entity.usuario.Usuario;
+import com.api.barbearia.domain.entity.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 

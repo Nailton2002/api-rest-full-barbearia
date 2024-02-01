@@ -1,11 +1,10 @@
-package com.api.barbearia.application.resource.barbeiro;
+package com.api.barbearia.application.resource;
 
 import com.api.barbearia.domain.dto.barbeiro.request.BarbeiroUpRequest;
 import com.api.barbearia.domain.dto.barbeiro.request.BarbeiroRequest;
 import com.api.barbearia.domain.dto.barbeiro.response.BarbeiroResponse;
 import com.api.barbearia.domain.dto.barbeiro.response.BarbeiroListResponse;
-import com.api.barbearia.domain.entity.barbeiro.Barbeiro;
-import com.api.barbearia.domain.service.barbeiro.BarbeiroService;
+import com.api.barbearia.domain.service.BarbeiroService;
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;

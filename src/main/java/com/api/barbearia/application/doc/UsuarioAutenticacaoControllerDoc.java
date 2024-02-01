@@ -1,4 +1,4 @@
-package com.api.barbearia.application.doc.usuario;
+package com.api.barbearia.application.doc;
 
 public interface UsuarioAutenticacaoControllerDoc {
 }

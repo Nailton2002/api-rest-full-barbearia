@@ -1,7 +1,7 @@
-package com.api.barbearia.application.resource.usuario;
+package com.api.barbearia.application.resource;
 
 import com.api.barbearia.domain.dto.usuario.UsuarioDadosAutenticacao;
-import com.api.barbearia.domain.entity.usuario.Usuario;
+import com.api.barbearia.domain.entity.Usuario;
 import com.api.barbearia.infra.security.DadosTokenJWT;
 import com.api.barbearia.infra.security.TokenService;
 
