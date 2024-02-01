@@ -1,6 +1,6 @@
 package com.api.barbearia.infra.agendamento.validations.agendamento;
 
-import com.api.barbearia.domain.dto.agendamento.AgendamentoDadosCadastro;
+import com.api.barbearia.domain.dto.agendamento.request.AgendamentoRequest;
 import com.api.barbearia.infra.agendamento.exception.ValidacaoException;
 import com.api.barbearia.domain.repository.barbeiro.BarbeiroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +12,13 @@ public class ValidadorBarbeiroAtivo implements ValidadorAgendamento{
     @Autowired
     private BarbeiroRepository repository;
 
-    public void validar(AgendamentoDadosCadastro dados){
+    public void validar(AgendamentoRequest request){
 
-        if (dados.idBarbeiro() == null){
+        if (request.idBarbeiro() == null){
             return;
         }
 
-        var medicoEstaAtivo = repository.findAtivoById(dados.idBarbeiro());
+        var medicoEstaAtivo = repository.findAtivoById(request.idBarbeiro());
 
         if (!medicoEstaAtivo){
             throw new ValidacaoException("Não pode ser agendada com este barbeiro!");

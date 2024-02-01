@@ -1,6 +1,6 @@
 package com.api.barbearia.infra.agendamento.validations.cancelamentos;
 
-import com.api.barbearia.domain.dto.agendamento.AgendamentoDadosCancelamento;
+import com.api.barbearia.domain.dto.agendamento.request.AgendamentoCancelamentoRequeste;
 import com.api.barbearia.infra.agendamento.exception.ValidacaoException;
 import com.api.barbearia.domain.repository.agendamento.AgendamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +15,8 @@ public class ValidadorHorarioAntecedencia implements ValidadorCancelamentoDeAgen
     @Autowired
     private AgendamentoRepository repository;
     @Override
-    public void validar(AgendamentoDadosCancelamento dados) {
-        var agendamento = repository.getReferenceById(dados.idAgendamento());
+    public void validar(AgendamentoCancelamentoRequeste request) {
+        var agendamento = repository.getReferenceById(request.idAgendamento());
         var agora = LocalDateTime.now();
         var diferencaEmHoras = Duration.between(agora, agendamento.getData()).toHours();
 

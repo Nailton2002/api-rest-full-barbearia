@@ -1,6 +1,6 @@
 package com.api.barbearia.infra.agendamento.validations.agendamento;
 
-import com.api.barbearia.domain.dto.agendamento.AgendamentoDadosCadastro;
+import com.api.barbearia.domain.dto.agendamento.request.AgendamentoRequest;
 import com.api.barbearia.infra.agendamento.exception.ValidacaoException;
 import com.api.barbearia.domain.repository.agendamento.AgendamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +12,11 @@ public class ValidadorClienteSemOutroAgendamentoNoDia implements ValidadorAgenda
     @Autowired
     private AgendamentoRepository repository;
 
-    public void validar(AgendamentoDadosCadastro dados){
+    public void validar(AgendamentoRequest request){
 
-        var primeiroHorario = dados.data().withHour(7);
-        var ultimoHorario = dados.data().withHour(18);
-        var pacientePossuiOutraConsultaNoDia = repository.existsByClienteIdAndDataBetween(dados.idCliente(),
+        var primeiroHorario = request.data().withHour(7);
+        var ultimoHorario = request.data().withHour(18);
+        var pacientePossuiOutraConsultaNoDia = repository.existsByClienteIdAndDataBetween(request.idCliente(),
             primeiroHorario, ultimoHorario);
 
         if (pacientePossuiOutraConsultaNoDia){

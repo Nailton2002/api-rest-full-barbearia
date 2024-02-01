@@ -1,8 +1,8 @@
 package com.api.barbearia.domain.service.agendamento;
 
-import com.api.barbearia.domain.dto.agendamento.AgendamentoDadosCadastro;
-import com.api.barbearia.domain.dto.agendamento.AgendamentoDadosCancelamento;
-import com.api.barbearia.domain.dto.agendamento.AgendamentoDadosDetalhados;
+import com.api.barbearia.domain.dto.agendamento.request.AgendamentoRequest;
+import com.api.barbearia.domain.dto.agendamento.request.AgendamentoCancelamentoRequeste;
+import com.api.barbearia.domain.dto.agendamento.response.AgendamentoResponse;
 import com.api.barbearia.domain.entity.agendamento.Agendamento;
 import com.api.barbearia.infra.agendamento.exception.ValidacaoException;
 import com.api.barbearia.domain.repository.agendamento.AgendamentoRepository;
@@ -26,68 +26,64 @@ public class AgendamentoService {
     private BarbeiroRepository barbeiroRepository;
     @Autowired
     private ClienteRepository clienteRepository;
-
-    //USANDO O PADRÃO DE PROJETO -> Strategy
     @Autowired
     private List<ValidadorAgendamento> validadores;
-    //AQUI É INJETADO UMA LISTA DE VALIDADORES...
-
+    //USANDO O PADRÃO DE PROJETO -> Strategy
     @Autowired
     private List<ValidadorCancelamentoDeAgendamento> validadoresCancelamento;
 
-    public void cancelar(AgendamentoDadosCancelamento dados) {
+    public void cancelar(AgendamentoCancelamentoRequeste request) {
 
-        if (!agendamentoRepository.existsById(dados.idAgendamento())) {
+        if (!agendamentoRepository.existsById(request.idAgendamento())) {
             throw new ValidacaoException("Id do agendamento informado não existe!");
         }
-        validadoresCancelamento.forEach(v -> v.validar(dados));
+        validadoresCancelamento.forEach(v -> v.validar(request));
 
-        var consulta = agendamentoRepository.getReferenceById(dados.idAgendamento());
-        consulta.cancelar(dados.motivo());
+        var consulta = agendamentoRepository.getReferenceById(request.idAgendamento());
+        consulta.cancelar(request.motivo());
     }
 
-    public AgendamentoDadosDetalhados agendar(AgendamentoDadosCadastro dados) {
+    public AgendamentoResponse agendar(AgendamentoRequest request) {
 
-        if (!clienteRepository.existsById(dados.idCliente())) {
+        if (!clienteRepository.existsById(request.idCliente())) {
             throw new ValidacaoException("Id do cliente informado não existe!");
         }
-        if (dados.idBarbeiro() != null && !barbeiroRepository.existsById(dados.idBarbeiro())) {
+        if (request.idBarbeiro() != null && !barbeiroRepository.existsById(request.idBarbeiro())) {
             throw new ValidacaoException("Id do barbeiro informado não existe!");
         }
-        validadores.forEach(v -> v.validar(dados));
+        validadores.forEach(v -> v.validar(request));
 
-        var cliente = clienteRepository.getReferenceById(dados.idCliente());
-        var barbeiro = escolherBarbeiro(dados);
+        var cliente = clienteRepository.getReferenceById(request.idCliente());
+        var barbeiro = escolherBarbeiro(request);
 
         if (barbeiro == null) {
             throw new ValidacaoException("Não existe barbeiro disponível nessa data!");
         }
-
-        var agendamento = new Agendamento(null, barbeiro, cliente, dados.data(), null);
+        var agendamento = new Agendamento(null, barbeiro, cliente, request.data(), null);
         agendamentoRepository.save(agendamento);
-        return new AgendamentoDadosDetalhados(agendamento);
+        return new AgendamentoResponse(agendamento);
     }
 
 
-    private Barbeiro escolherBarbeiro(AgendamentoDadosCadastro dados) {
+    private Barbeiro escolherBarbeiro(AgendamentoRequest request) {
 
-        if (dados.idBarbeiro() != null) {
-            return barbeiroRepository.getReferenceById(dados.idBarbeiro());
+        if (request.idBarbeiro() != null) {
+            return barbeiroRepository.getReferenceById(request.idBarbeiro());
         }
-        if (dados.especialidade() == null) {
+        if (request.especialidade() == null) {
             throw new ValidacaoException("Especialidade é obrigatória quando barbeiro não for escolhido!");
         }
-        return barbeiroRepository.escolherBarbeiroAleatorioLivreNaData(dados.especialidade(), dados.data());
+        return barbeiroRepository.escolherBarbeiroAleatorioLivreNaData(request.especialidade(), request.data());
     }
 
-    public AgendamentoDadosDetalhados verAgenda(Long id){
+    public AgendamentoResponse verAgenda(Long id){
         var obj = agendamentoRepository.findById(id).orElseThrow(()-> new ObjectNotFoundException(id));
-        return new AgendamentoDadosDetalhados(obj);
+        return new AgendamentoResponse(obj);
     }
 
-    public List<AgendamentoDadosDetalhados> verTodaAgenda() {
+    public List<AgendamentoResponse> verTodaAgenda() {
         List<Agendamento> list = agendamentoRepository.findAll();
-        List<AgendamentoDadosDetalhados> listdados = list.stream().map(a -> new AgendamentoDadosDetalhados(a)).collect(Collectors.toList());
+        List<AgendamentoResponse> listdados = list.stream().map(a -> new AgendamentoResponse(a)).collect(Collectors.toList());
         return listdados;
     }
 }

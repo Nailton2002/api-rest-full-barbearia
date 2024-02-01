@@ -1,8 +1,8 @@
 package com.api.barbearia.application.resource.agendamento;
 
-import com.api.barbearia.domain.dto.agendamento.AgendamentoDadosCadastro;
-import com.api.barbearia.domain.dto.agendamento.AgendamentoDadosCancelamento;
-import com.api.barbearia.domain.dto.agendamento.AgendamentoDadosDetalhados;
+import com.api.barbearia.domain.dto.agendamento.request.AgendamentoRequest;
+import com.api.barbearia.domain.dto.agendamento.request.AgendamentoCancelamentoRequeste;
+import com.api.barbearia.domain.dto.agendamento.response.AgendamentoResponse;
 import com.api.barbearia.domain.service.agendamento.AgendamentoService;
 import jakarta.validation.Valid;
 
@@ -24,26 +24,26 @@ public class AgendaController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity agendar(@RequestBody @Valid AgendamentoDadosCadastro dados) {
-        var dto = service.agendar(dados);
+    public ResponseEntity agendar(@RequestBody @Valid AgendamentoRequest request) {
+        var dto = service.agendar(request);
         return ResponseEntity.ok(dto);
     }
 
     @Transactional
     @DeleteMapping
-    public ResponseEntity cancelar(@RequestBody @Valid AgendamentoDadosCancelamento dados) {
-        service.cancelar(dados);
+    public ResponseEntity cancelar(@RequestBody @Valid AgendamentoCancelamentoRequeste requeste) {
+        service.cancelar(requeste);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping
-    public ResponseEntity<List<AgendamentoDadosDetalhados>> verTodaAgenda(){
-        List<AgendamentoDadosDetalhados> listDados = service.verTodaAgenda();
+    public ResponseEntity<List<AgendamentoResponse>> verTodaAgenda(){
+        List<AgendamentoResponse> listDados = service.verTodaAgenda();
         return ResponseEntity.ok().body(listDados);
     }
     @GetMapping("/{id}")
-    public ResponseEntity<AgendamentoDadosDetalhados> verAgenda(@PathVariable Long id){
-        AgendamentoDadosDetalhados dados = service.verAgenda(id);
+    public ResponseEntity<AgendamentoResponse> verAgenda(@PathVariable Long id){
+        AgendamentoResponse dados = service.verAgenda(id);
         return ResponseEntity.ok().body(dados);
     }
 

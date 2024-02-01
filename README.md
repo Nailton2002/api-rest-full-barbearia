@@ -12,6 +12,7 @@ As seguintes tecnologias foram utilizadas no desenvolvimento da API Rest do proj
 - **[Hibernate](https://hibernate.org)**
 - **[Flyway](https://flywaydb.org)**
 - **[Lombok](https://projectlombok.org)**
+- **[Record](https://docs.oracle.com/en/java/javase/17/language/records.html#GUID-6699E26F-4A9B-4393-A08B-1E47D4B2D263)**
 ___
 
 ## ⚙️ Funcionalidades
@@ -21,6 +22,7 @@ ___
 - [x] Agendamento dos cortes;
 - [x] Cancelamento dos agendamentos.
 - [x] Configuração, segurança e TOKEN do Usuario;
+- [x] Configuração, documentação com swagger;
 ___
 
 ## 📄 Documentação

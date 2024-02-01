@@ -1,6 +1,6 @@
 package com.api.barbearia.infra.agendamento.validations.agendamento;
 
-import com.api.barbearia.domain.dto.agendamento.AgendamentoDadosCadastro;
+import com.api.barbearia.domain.dto.agendamento.request.AgendamentoRequest;
 
 //USANDO O POLIMORFISMO
 //Princípios do SOLID
@@ -10,5 +10,5 @@ import com.api.barbearia.domain.dto.agendamento.AgendamentoDadosCadastro;
 public interface ValidadorAgendamento {
 
     //METODOS COM O MESMO NOME E ASSINATURA, E O CORPO DO METODO EM CADA CLASSE QUE FAZ ALGO DIFERENTE.
-    void validar(AgendamentoDadosCadastro dados);
+    void validar(AgendamentoRequest request);
 }
